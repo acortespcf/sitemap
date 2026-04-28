@@ -1,6 +1,5 @@
 /.venv/
 /output/
-/config.json
 /sitemap_state.json
 *.pyc
 __pycache__/

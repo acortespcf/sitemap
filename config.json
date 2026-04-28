@@ -1,0 +1,45 @@
+{
+  "base_url": "https://www.pcfactory.cl",
+  "output_dir": "output",
+  "sitemap_base_url": "https://acortespcf.github.io/sitemap",
+  "publish_dir": "",
+  "strip_query": true,
+  "limits": {
+    "max_urls_per_sitemap": 50000,
+    "max_bytes_per_sitemap": 52428800
+  },
+  "filters": {
+    "include": [],
+    "exclude": []
+  },
+  "change_detection": {
+    "enabled": true,
+    "state_file": "sitemap_state.json",
+    "hash_fields": ["loc"]
+  },
+  "sources": {
+    "products": {
+      "enabled": true,
+      "feed_url": "https://api.pcfactory.cl/pcfactory-services-catalogo/v1/catalogo/productos/feed",
+      "changefreq": "daily",
+      "priority": 0.8,
+      "lastmod": "today"
+    },
+    "categories": {
+      "enabled": true,
+      "endpoint": "https://api.pcfactory.cl/api-dex-catalog/v1/catalog/category/PCF",
+      "changefreq": "daily",
+      "priority": 0.8,
+      "lastmod": "today"
+    },
+    "modyo": {
+      "enabled": true,
+      "endpoint": "https://ww3.pcfactory.cl/api/admin/sites/1/layout_pages",
+      "cookie_env": "MODYO_COOKIE",
+      "per_page": 30,
+      "changefreq": "monthly",
+      "priority": 0.8,
+      "lastmod": "updated_at"
+    }
+  }
+}

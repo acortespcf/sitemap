@@ -7,13 +7,13 @@ Genera un sitemap XML combinando productos, categorias y paginas Modyo.
 - requests
 
 ## Configuracion
-1) Copia el archivo de ejemplo:
+1) Ajusta el archivo `config.json`:
 
 ```
-cp config.example.json config.json
+cat config.json
 ```
 
-2) Define la cookie de Modyo por variable de entorno (local):
+2) Define la cookie de Modyo por variable de entorno (local o GitHub secret):
 
 ```
 export MODYO_COOKIE="_pcfactory_session=..."
