@@ -1,0 +1,40 @@
+name: Generate sitemap
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sitemap-generator
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: [self-hosted, sitemap]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Generate sitemap
+        env:
+          MODYO_COOKIE: ${{ secrets.MODYO_COOKIE }}
+        run: python generate_sitemap.py --config "${SITEMAP_CONFIG_PATH:-config.json}" --output-dir output
+
+      - name: Publish sitemap (gh-pages)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output
+          publish_branch: gh-pages
