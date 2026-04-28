@@ -365,6 +365,17 @@ def build_cookie_value(raw: str) -> str:
     return f"_pcfactory_session={raw}"
 
 
+def flatten_modyo_pages(pages: Iterable[Dict[str, Any]], rows: Optional[List[Dict[str, Any]]] = None) -> List[Dict[str, Any]]:
+    if rows is None:
+        rows = []
+    for page in pages or []:
+        rows.append(page)
+        children = page.get("children") or []
+        if isinstance(children, list) and children:
+            flatten_modyo_pages(children, rows)
+    return rows
+
+
 def fetch_modyo_pages(cfg: Dict[str, Any], base_url: str, strip_query: bool) -> List[Tuple[str, Optional[str]]]:
     endpoint = cfg["endpoint"]
     cookie_env = cfg.get("cookie_env") or "MODYO_COOKIE"
@@ -397,7 +408,8 @@ def fetch_modyo_pages(cfg: Dict[str, Any], base_url: str, strip_query: bool) -> 
         meta = data.get("meta", {})
         if total_pages is None:
             total_pages = meta.get("total_pages", 1)
-        items = data.get("layout_pages", [])
+        raw_pages = data.get("layout_pages", [])
+        items = flatten_modyo_pages(raw_pages)
 
         for item in items:
             if not item.get("current_published"):
