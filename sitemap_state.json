@@ -1,10 +1,10 @@
 {
-  "hash": "9ef2971d2dcffd435a09a80233d3687f48254f9c858cfcf454825f0f744d871e",
-  "total_urls": 3008,
+  "hash": "f1f61c6e98e8a0d36307d2ce0fed5b6a0e8fb559301ec092a04800b1e20c5f90",
+  "total_urls": 3009,
   "counts": {
-    "products": 2166,
+    "products": 2167,
     "categories": 370,
     "modyo": 495
   },
-  "generated_at": "2026-04-28T00:40:34.071450Z"
+  "generated_at": "2026-04-28T07:28:17.281965Z"
 }
