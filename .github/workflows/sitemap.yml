@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   generate:
-    runs-on: [self-hosted, sitemap]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
